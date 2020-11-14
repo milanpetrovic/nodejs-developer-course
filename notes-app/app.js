@@ -1,13 +1,40 @@
 // const validator = require('validator');
 const chalk = require('chalk');
+const yargs = require('yargs');
 const getNotes = require('./notes');
 
-// node app.js remove --title="This is the title" - YARGS package to parse title
-const command = process.argv[2];
-console.log(process.argv);
+// Create YARGS commands
+yargs.command({
+    command: 'add',
+    describe: 'Add a new note',
+    handler: () => {
+        console.log('Adding a new note.')
+    }
+});
 
-if (command === 'add') {
-    console.log('Adding note...');
-} else if (command === 'remove') {
-    console.log('Removing note...');
-}
+yargs.command({
+    command: 'remove',
+    describe: 'Remove the note',
+    handler: () => {
+        console.log('Removing the note.')        
+    }
+})
+
+yargs.command({
+    command: 'list',
+    describe: 'List all notes',
+    handler: () => {
+        console.log('Listing all notes.')
+    }
+})
+
+yargs.command({
+    command: 'read',
+    describe: 'Read the note.',
+    handler: () => {
+        console.log('Reading the note.')
+    }
+})
+
+
+console.log(yargs.argv);
