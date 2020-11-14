@@ -4,6 +4,9 @@ const chalk = require('chalk');
 const successMsg = chalk.green.bold.inverse;
 const errorMsg = chalk.bold.red.inverse;
 const warningMsg = chalk.hex('#FF8800').inverse;
+
+const noteTitleChalk = chalk.white.bgBlue.bold;
+const noteBodyChalk = chalk.green.bold.inverse;
 // const getNotes = () => {
 //     return 'Your notes...';
 // };
@@ -53,8 +56,18 @@ const removeNote = (title) => {
     }
 };
 
+const listNotes = () => {
+    const notes = loadNotes();
+    console.log(chalk.inverse.bold('Your Notes: \n\n'));
+    for(const note of notes) {
+        console.log(noteTitleChalk(note.title + '\n'));
+        console.log(noteBodyChalk(note.body + '\n\n'));
+    }
+};
+
 module.exports = {
     // getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 };
