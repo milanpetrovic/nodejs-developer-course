@@ -29,9 +29,9 @@ const saveNotes = (notes) => {
 const addNote = (title, body) => {
     const notes = loadNotes();
     // Check if existing title is matching title we're about to add
-    const duplicateNotes = notes.filter((note) => note.title === title);
+    const duplicateNote = notes.find((note) => note.title === title);
 
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
