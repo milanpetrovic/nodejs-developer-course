@@ -58,10 +58,9 @@ const removeNote = (title) => {
 
 const listNotes = () => {
     const notes = loadNotes();
-    console.log(chalk.inverse.bold('Your Notes: \n\n'));
+    console.log(chalk.inverse.bold('Your Notes: \n'));
     for(const note of notes) {
-        console.log(noteTitleChalk(note.title + '\n'));
-        console.log(noteBodyChalk(note.body + '\n\n'));
+        console.log(noteTitleChalk(note.title));
     }
 };
 
