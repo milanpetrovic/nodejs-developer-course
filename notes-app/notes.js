@@ -4,12 +4,7 @@ const chalk = require('chalk');
 const successMsg = chalk.green.bold.inverse;
 const errorMsg = chalk.bold.red.inverse;
 const warningMsg = chalk.hex('#FF8800').inverse;
-
 const noteTitleChalk = chalk.white.bgBlue.bold;
-const noteBodyChalk = chalk.green.bold.inverse;
-// const getNotes = () => {
-//     return 'Your notes...';
-// };
 
 const loadNotes = () => {
     try {
@@ -64,9 +59,21 @@ const listNotes = () => {
     }
 };
 
+const readNote = (title) => {
+    const notes = loadNotes();
+    // Find matching note
+    const noteToRead = notes.find((note) => note.title === title);
+    if (noteToRead) {
+        console.log(noteTitleChalk(noteToRead.title));
+        console.log(noteToRead.body);
+    } else {
+        console.log(errorMsg('No note found.'));
+    }
+};
+
 module.exports = {
-    // getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 };
