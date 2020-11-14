@@ -1,7 +1,7 @@
 // const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
-const getNotes = require('./notes');
+const notes = require('./notes');
 
 // Create YARGS commands
 yargs.command({
@@ -20,8 +20,7 @@ yargs.command({
         }
     },
     handler: (argv) => {
-        console.log('Title: ' + argv.title);
-        console.log('Body: ' + argv.body);
+        notes.addNote(argv.title, argv.body);
     }
 });
 
