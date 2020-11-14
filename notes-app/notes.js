@@ -3,6 +3,7 @@ const chalk = require('chalk');
 
 const successMsg = chalk.green.bold.inverse;
 const errorMsg = chalk.bold.red.inverse;
+const warningMsg = chalk.hex('#FF8800').inverse;
 // const getNotes = () => {
 //     return 'Your notes...';
 // };
@@ -35,9 +36,9 @@ const addNote = (title, body) => {
             body: body
         });
         saveNotes(notes);
-        console.log('New note added.');
+        console.log(successMsg('New note added.'));
     } else {
-        console.log('Note with given title already exists.');
+        console.log(warningMsg('Note with given title already exists.'));
     }
 };
 
