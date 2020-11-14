@@ -1,7 +1,25 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
-const getNotes = () => {
-    return 'Your notes...';
+const successMsg = chalk.green.bold.inverse;
+const errorMsg = chalk.bold.red.inverse;
+// const getNotes = () => {
+//     return 'Your notes...';
+// };
+
+const loadNotes = () => {
+    try {
+        const dataBuffer = fs.readFileSync('notes.json');
+        const dataJSON = dataBuffer.toString();
+        return JSON.parse(dataJSON);    
+    } catch(e) {
+        return [];
+    }
+};
+
+const saveNotes = (notes) => {
+    const dataJSON = JSON.stringify(notes);
+    fs.writeFileSync('notes.json', dataJSON);
 };
 
 const addNote = (title, body) => {
@@ -23,22 +41,22 @@ const addNote = (title, body) => {
     }
 };
 
-const saveNotes = (notes) => {
-    const dataJSON = JSON.stringify(notes);
-    fs.writeFileSync('notes.json', dataJSON);
-};
+const removeNote = (title) => {
+    const notes = loadNotes();
+    const notesToKeep = notes.filter((note) => {
+        return note.title !== title;
+    });
 
-const loadNotes = () => {
-    try {
-        const dataBuffer = fs.readFileSync('notes.json');
-        const dataJSON = dataBuffer.toString();
-        return JSON.parse(dataJSON);    
-    } catch(e) {
-        return [];
+    if (notes.length > notesToKeep.length) {
+        console.log(successMsg('Note removed.'));
+        saveNotes(notesToKeep);
+    } else {
+        console.log(errorMsg('No note found.'));
     }
 };
 
 module.exports = {
-    getNotes: getNotes,
-    addNote: addNote
+    // getNotes: getNotes,
+    addNote: addNote,
+    removeNote: removeNote
 };
