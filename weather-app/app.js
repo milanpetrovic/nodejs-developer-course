@@ -15,3 +15,4 @@ console.log('Stopping');
 // Stopping
 // 0 Second Timer
 // 2 Second Timer
+// Check out call stack, event loop and callback queue for further explanation
